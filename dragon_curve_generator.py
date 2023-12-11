@@ -39,7 +39,7 @@ t.color(args.color)
 s = turtle.Screen()
 s.title("Dragon Curve Generator")
 s.bgcolor("black")
-s.screensize(1920, 1080)
+s.screensize(1920*2, 1080*2)
 s.setup(width=1.0, height=1.0, startx=None, starty=None)
 
 t.forward(10)
