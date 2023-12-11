@@ -1,23 +1,32 @@
 import turtle
 import argparse
 
-iterations = 10
-
-""" parser = argparse.ArgumentParser(
+parser = argparse.ArgumentParser(
     prog = 'dragon_curve_generator',
     description = 'Dragon curve generator'
 )
 
 parser.add_argument('iterations', metavar = 'iterations', type = int, help = 'number of iterations to be performed')
+parser.add_argument('color', metavar = 'color', type = str, help = 'color of the curve')
 
-args = parser.parse_args() """
+args = parser.parse_args()
 
 def iterate(sequence):
-    sequence = sequence.append(0).append(map(lambda x: 1 if x == 0 else 0, sequence[::-1]))
+    sequence = sequence + "0" + swap(sequence[::-1])
     return sequence
 
+def swap(sequence):
+    auxSequence = ""
+    for x in sequence:
+        if x == "0":
+            auxSequence += "1"
+        else: 
+            auxSequence += "0"
+    return auxSequence
+
+
 def generateSequence(iterations):
-    sequence = list((0))
+    sequence = "0"
     for i in range(0, iterations):
         sequence = iterate(sequence)
     return sequence
@@ -25,7 +34,7 @@ def generateSequence(iterations):
 t = turtle.Turtle()
 t.hideturtle()
 t.speed("fastest")
-t.color("#054b8c")
+t.color(args.color)
 
 s = turtle.Screen()
 s.title("Dragon Curve Generator")
@@ -34,8 +43,8 @@ s.screensize(1920, 1080)
 s.setup(width=1.0, height=1.0, startx=None, starty=None)
 
 t.forward(10)
-for x in generateSequence(iterations):
-    if x == 0:
+for x in generateSequence(args.iterations):
+    if x == "0":
         t.right(90)
         t.forward(10)
     else:
